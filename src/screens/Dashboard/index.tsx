@@ -13,44 +13,20 @@ import {
   BottomNavigation,
   NavOption,
   NavOptionTitle,
-  SideBar,
-  SidebarContentTitle,
-  SidebarInfo,
-  UserInfo,
-  Division,
 } from "./style";
+
+import Sidebar from "../../components/Sidebar";
+
 import { TouchableOpacity, ScrollView, View, Text } from "react-native";
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   return (
     <React.Fragment>
       {toggleSideBar && (
-        <SideBar>
-          <ScrollView>
-            <SidebarContentTitle>
-              <Feather name="user" color="#8C52E5" size={35} />
-              <TouchableOpacity onPress={() => setToggleSideBar(false)}>
-                <Feather name="x" color="#8C52E5" size={35} />
-              </TouchableOpacity>
-            </SidebarContentTitle>
-            <View>
-              <SidebarInfo>Seu nome:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-              <SidebarInfo>Email:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-
-              <SidebarInfo>Username:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-
-              <SidebarInfo>CPF:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-
-              <Division />
-              <SidebarInfo>Você tem:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-            </View>
-          </ScrollView>
-        </SideBar>
+        <Sidebar
+          toggleSideBar={toggleSideBar}
+          setToggleSideBar={setToggleSideBar}
+        />
       )}
       <DashboardContainer>
         <ScrollView onTouchStart={() => setToggleSideBar(false)}>
