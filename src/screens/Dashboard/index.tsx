@@ -15,85 +15,104 @@ import {
   NavOptionTitle,
   SideBar,
   SidebarContentTitle,
+  SidebarInfo,
+  UserInfo,
+  Division,
 } from "./style";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-
+import { TouchableOpacity, ScrollView, View, Text } from "react-native";
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
-
   return (
-    <DashboardContainer>
+    <React.Fragment>
       {toggleSideBar && (
         <SideBar>
           <ScrollView>
             <SidebarContentTitle>
-              <Feather name="user" color="violet" size={35} />
+              <Feather name="user" color="#8C52E5" size={35} />
               <TouchableOpacity onPress={() => setToggleSideBar(false)}>
-                <Feather name="x" color="violet" size={35} />
+                <Feather name="x" color="#8C52E5" size={35} />
               </TouchableOpacity>
             </SidebarContentTitle>
+            <View>
+              <SidebarInfo>Seu nome:</SidebarInfo>
+              <UserInfo>Nome</UserInfo>
+              <SidebarInfo>Email:</SidebarInfo>
+              <UserInfo>Nome</UserInfo>
+
+              <SidebarInfo>Username:</SidebarInfo>
+              <UserInfo>Nome</UserInfo>
+
+              <SidebarInfo>CPF:</SidebarInfo>
+              <UserInfo>Nome</UserInfo>
+
+              <Division />
+              <SidebarInfo>Você tem:</SidebarInfo>
+              <UserInfo>Nome</UserInfo>
+            </View>
           </ScrollView>
         </SideBar>
       )}
-      <ScrollView onTouchStart={() => setToggleSideBar(false)}>
-        <Content>
-          <ContentTitle>
-            <Title>Olá, Usuário</Title>
-            <TouchableOpacity onPress={() => setToggleSideBar(true)}>
-              <Feather name="user" color="white" size={35} />
-            </TouchableOpacity>
-          </ContentTitle>
-          <Card>
-            <CardTitle>
-              <Feather name="dollar-sign" size={20} /> Saldo da conta
-            </CardTitle>
-            <Balance>R$:1.890,00</Balance>
-          </Card>
-          <Card>
-            <CardTitle>
-              <Feather name="dollar-sign" size={20} /> Planos de conta
-            </CardTitle>
-            <CardSubTitle>Tipo de plano:</CardSubTitle>
-            <Balance>R$:1.890,00</Balance>
-          </Card>
-          <Card>
-            <CardTitle>
-              <Feather name="dollar-sign" size={20} /> Últimos lançamentos
-            </CardTitle>
-            <Historic>
+      <DashboardContainer>
+        <ScrollView onTouchStart={() => setToggleSideBar(false)}>
+          <Content>
+            <ContentTitle>
+              <Title>Olá, Usuário</Title>
+              <TouchableOpacity onPress={() => setToggleSideBar(true)}>
+                <Feather name="user" color="white" size={35} />
+              </TouchableOpacity>
+            </ContentTitle>
+            <Card>
+              <CardTitle>
+                <Feather name="dollar-sign" size={20} /> Saldo da conta
+              </CardTitle>
               <Balance>R$:1.890,00</Balance>
-              <CardSubTitle>11 de Fev</CardSubTitle>
-            </Historic>
-          </Card>
-        </Content>
-      </ScrollView>
-      <BottomNavigation>
-        <TouchableOpacity>
-          <NavOption>
-            <Feather name="maximize-2" color="white" size={35} />
-            <NavOptionTitle>Transferir</NavOptionTitle>
-          </NavOption>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <NavOption>
-            <Feather name="book" color="white" size={35} />
-            <NavOptionTitle>Lançamentos</NavOptionTitle>
-          </NavOption>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <NavOption>
-            <Feather name="corner-down-right" color="white" size={35} />
-            <NavOptionTitle>Depositar</NavOptionTitle>
-          </NavOption>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <NavOption>
-            <Feather name="dollar-sign" color="white" size={35} />
-            <NavOptionTitle>Planos</NavOptionTitle>
-          </NavOption>
-        </TouchableOpacity>
-      </BottomNavigation>
-    </DashboardContainer>
+            </Card>
+            <Card>
+              <CardTitle>
+                <Feather name="dollar-sign" size={20} /> Planos de conta
+              </CardTitle>
+              <CardSubTitle>Tipo de plano:</CardSubTitle>
+              <Balance>R$:1.890,00</Balance>
+            </Card>
+            <Card>
+              <CardTitle>
+                <Feather name="dollar-sign" size={20} /> Últimos lançamentos
+              </CardTitle>
+              <Historic>
+                <Balance>R$:1.890,00</Balance>
+                <CardSubTitle>11 de Fev</CardSubTitle>
+              </Historic>
+            </Card>
+          </Content>
+        </ScrollView>
+        <BottomNavigation>
+          <TouchableOpacity>
+            <NavOption>
+              <Feather name="maximize-2" color="white" size={35} />
+              <NavOptionTitle>Transferir</NavOptionTitle>
+            </NavOption>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <NavOption>
+              <Feather name="book" color="white" size={35} />
+              <NavOptionTitle>Lançamentos</NavOptionTitle>
+            </NavOption>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <NavOption>
+              <Feather name="corner-down-right" color="white" size={35} />
+              <NavOptionTitle>Depositar</NavOptionTitle>
+            </NavOption>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <NavOption>
+              <Feather name="dollar-sign" color="white" size={35} />
+              <NavOptionTitle>Planos</NavOptionTitle>
+            </NavOption>
+          </TouchableOpacity>
+        </BottomNavigation>
+      </DashboardContainer>
+    </React.Fragment>
   );
 };
 
