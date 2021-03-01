@@ -10,16 +10,17 @@ import {
   Balance,
   CardSubTitle,
   Historic,
-  BottomNavigation,
-  NavOption,
-  NavOptionTitle,
 } from "./style";
 
+import DHistoric from "../../screens/DashboardLancamentos";
+
 import Sidebar from "../../components/Sidebar";
+import BottomNavigation from "../../components/BottomNavigation";
 
 import { TouchableOpacity, ScrollView, View, Text } from "react-native";
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
+  const [navSelected, setNavSelected] = useState("");
   return (
     <React.Fragment>
       {toggleSideBar && (
@@ -37,56 +38,37 @@ const Dashboard: React.FC = () => {
                 <Feather name="user" color="white" size={35} />
               </TouchableOpacity>
             </ContentTitle>
-            <Card>
-              <CardTitle>
-                <Feather name="dollar-sign" size={20} /> Saldo da conta
-              </CardTitle>
-              <Balance>R$:1.890,00</Balance>
-            </Card>
-            <Card>
-              <CardTitle>
-                <Feather name="dollar-sign" size={20} /> Planos de conta
-              </CardTitle>
-              <CardSubTitle>Tipo de plano:</CardSubTitle>
-              <Balance>R$:1.890,00</Balance>
-            </Card>
-            <Card>
-              <CardTitle>
-                <Feather name="dollar-sign" size={20} /> Últimos lançamentos
-              </CardTitle>
-              <Historic>
-                <Balance>R$:1.890,00</Balance>
-                <CardSubTitle>11 de Fev</CardSubTitle>
-              </Historic>
-            </Card>
+            {navSelected === "historic" ? (
+              <DHistoric />
+            ) : (
+              <React.Fragment>
+                <Card>
+                  <CardTitle>
+                    <Feather name="dollar-sign" size={20} /> Saldo da conta
+                  </CardTitle>
+                  <Balance>R$:1.890,00</Balance>
+                </Card>
+                <Card>
+                  <CardTitle>
+                    <Feather name="dollar-sign" size={20} /> Planos de conta
+                  </CardTitle>
+                  <CardSubTitle>Tipo de plano:</CardSubTitle>
+                  <Balance>R$:1.890,00</Balance>
+                </Card>
+                <Card>
+                  <CardTitle>
+                    <Feather name="dollar-sign" size={20} /> Últimos lançamentos
+                  </CardTitle>
+                  <Historic>
+                    <Balance>R$:1.890,00</Balance>
+                    <CardSubTitle>11 de Fev</CardSubTitle>
+                  </Historic>
+                </Card>
+              </React.Fragment>
+            )}
           </Content>
         </ScrollView>
-        <BottomNavigation>
-          <TouchableOpacity>
-            <NavOption>
-              <Feather name="maximize-2" color="white" size={35} />
-              <NavOptionTitle>Transferir</NavOptionTitle>
-            </NavOption>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <NavOption>
-              <Feather name="book" color="white" size={35} />
-              <NavOptionTitle>Lançamentos</NavOptionTitle>
-            </NavOption>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <NavOption>
-              <Feather name="corner-down-right" color="white" size={35} />
-              <NavOptionTitle>Depositar</NavOptionTitle>
-            </NavOption>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <NavOption>
-              <Feather name="dollar-sign" color="white" size={35} />
-              <NavOptionTitle>Planos</NavOptionTitle>
-            </NavOption>
-          </TouchableOpacity>
-        </BottomNavigation>
+        <BottomNavigation setNavSelected={setNavSelected} />
       </DashboardContainer>
     </React.Fragment>
   );
