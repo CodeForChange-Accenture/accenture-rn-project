@@ -13,7 +13,7 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="splashscreen" component={SplashScreen} />
+        <Screen name="Splashscreen" component={SplashScreen} />
       </Navigator>
     </NavigationContainer>
   );
