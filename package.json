@@ -18,6 +18,7 @@
     "lottie-react-native": "~2.6.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^6.15.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-maps": "0.27.1",
@@ -32,6 +33,8 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "@types/styled-components": "^5.1.7",
+    "@types/styled-components-react-native": "^5.1.1",
     "typescript": "~4.0.0"
   },
   "private": true
