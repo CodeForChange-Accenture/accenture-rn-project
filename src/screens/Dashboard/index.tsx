@@ -18,9 +18,19 @@ import Sidebar from "../../components/Sidebar";
 import BottomNavigation from "../../components/BottomNavigation";
 
 import { TouchableOpacity, ScrollView, View, Text } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [navSelected, setNavSelected] = useState("");
+
+  // testando para pegar o token
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('@tokenApp')
+    console.log(token)
+  }
+  getToken()
+
   return (
     <React.Fragment>
       {toggleSideBar && (

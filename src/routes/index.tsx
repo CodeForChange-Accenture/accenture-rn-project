@@ -6,9 +6,7 @@ import Dashboard from "../screens/Dashboard";
 import Transfer from "../screens/DashboardTransfer";
 import Deposit from "../screens/DashboardDeposit";
 import LoginRegister from "../screens/LoginRegister";
-import LoginHome from "../screens/LoginHome";
-
-
+import Login from "../screens/LoginHome";
 
 const { Navigator, Screen } = createStackNavigator();
 
