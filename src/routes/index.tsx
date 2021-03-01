@@ -5,6 +5,10 @@ import SplashScreen from "../screens/SplashScreen";
 import Dashboard from "../screens/Dashboard";
 import Transfer from "../screens/DashboardTransfer";
 import Deposit from "../screens/DashboardDeposit";
+import LoginRegister from "../screens/LoginRegister";
+import LoginHome from "../screens/LoginHome";
+
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,8 +20,10 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="splashscreen" component={SplashScreen} />
+        <Screen name="login" component={LoginHome} />
+        <Screen name="register" component={LoginRegister} />
         <Screen name="dashboard" component={Dashboard} />
+        <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="transfer" component={Transfer} />
         <Screen name="deposit" component={Deposit} />
       </Navigator>
