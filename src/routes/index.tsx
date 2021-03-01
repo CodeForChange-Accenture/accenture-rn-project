@@ -16,8 +16,8 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="dashboard" component={Dashboard} />
         <Screen name="splashscreen" component={SplashScreen} />
+        <Screen name="dashboard" component={Dashboard} />
         <Screen name="transfer" component={Transfer} />
         <Screen name="deposit" component={Deposit} />
       </Navigator>
