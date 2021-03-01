@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [navSelected, setNavSelected] = useState("");
 
+<<<<<<< HEAD
   // testando para pegar o token
   const getToken = async () => {
     const token = await AsyncStorage.getItem('@tokenApp')
@@ -31,6 +32,8 @@ const Dashboard: React.FC = () => {
   }
   getToken()
 
+=======
+>>>>>>> dashboard
   return (
     <React.Fragment>
       {toggleSideBar && (
