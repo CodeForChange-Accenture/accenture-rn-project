@@ -21,6 +21,7 @@ import { TouchableOpacity, ScrollView, View, Text } from "react-native";
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [navSelected, setNavSelected] = useState("");
+
   return (
     <React.Fragment>
       {toggleSideBar && (
