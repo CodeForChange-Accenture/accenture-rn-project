@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import {
   Card,
   CardTitle,
@@ -59,8 +59,8 @@ const Login: React.FC = () => {
                 placeholder="Digite sua senha"
               />
               <Button onPress={handleLogin} title="Continuar"></Button>
-              <p> Esqueci minha senha </p>
-              <p> Ainda não sou cliente </p>
+              <Text> Esqueci minha senha </Text>
+              <Text> Ainda não sou cliente </Text>
             </Form>
           </Card>
         </View>
