@@ -26,7 +26,8 @@ import DPlans from "../DashboardPlans";
 import Sidebar from "../../components/Sidebar";
 import BottomNavigation from "../../components/BottomNavigation";
 
-import { TouchableOpacity, ScrollView, View, Text } from "react-native";
+import { TouchableOpacity, ScrollView } from "react-native";
+
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [navSelected, setNavSelected] = useState("");
