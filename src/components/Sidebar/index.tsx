@@ -23,7 +23,7 @@ export default function Sidebar({
 }: SidebarState) {
   return (
     <SideBar>
-      <Animatable.View animation="fadeInRight" easing="ease-out" duration={500}>
+      <Animatable.View animation="fadeInRight" easing="ease-out" duration={800}>
         <SideBarContent>
           <ScrollView>
             <SidebarContentTitle>
