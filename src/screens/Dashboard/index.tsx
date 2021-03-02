@@ -1,32 +1,27 @@
-import React, { useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
-import { toast } from ' react-toastify';
-
-import { useDispatch, useSelector} from 'react-redux';
-
-import jwt_decode from 'jwt-decode'
-
+import { useNavigation } from "@react-navigation/native";
+import jwt_decode from 'jwt-decode';
+import React, { useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity } from "react-native";
+//import { useDispatch, useSelector } from 'react-redux';
+import BottomNavigation from "../../components/BottomNavigation";
+import Sidebar from "../../components/Sidebar";
+import { IBank, IUser } from '../../interfaces';
+import DHistoric from "../../screens/DashboardLancamentos";
+import api from '../../service';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  DashboardContainer,
-  Title,
-  Content,
-  Card,
-  ContentTitle,
-  CardTitle,
-  Balance,
-  CardSubTitle,
-  Historic,
+  Balance, Card,
+  CardSubTitle, CardTitle, Content,
+  ContentTitle, DashboardContainer,
+  Historic, Title
 } from "./style";
 
-import DHistoric from "../../screens/DashboardLancamentos";
-import DTransfer from "../DashboardTransfer";
-import D_Deposit from "../DashboardDeposit";
-import DPlans from "../DashboardPlans";
+import {
+  AddAccountInfos,
+  LoadAccountPlans,
+} from "../../store/modules/action";
 
-import Sidebar from "../../components/Sidebar";
-import BottomNavigation from "../../components/BottomNavigation";
-
-import { TouchableOpacity, ScrollView } from "react-native";
 
 const Dashboard: React.FC = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
@@ -35,61 +30,65 @@ const Dashboard: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [inicio, setInicio] = useState("2021-01-01");
   const [fim, setFim] = useState("2021-02-22");
+  
 
 
-  const dispatch = useDispatch();
-  const state = useSelector((state: IBank) => state);
-  const TokenStorage = null || localStorage.getItem("@tokenApp");
+  //const dispatch = useDispatch();
+  //const state = useSelector((state: IBank) => state);
 
 
-  const TokenDecodedValue = () => {
+
+  const navigation = useNavigation();
+
+  const TokenDecodedValue = async () => {
+    const TokenStorage = await AsyncStorage.getItem("@tokenApp");
     if (TokenStorage) {
       const TokenArr = TokenStorage.split(" ");
       const TokenDecode = TokenArr[1];
       const decoded = jwt_decode<IUser>(TokenDecode);
       return decoded.sub;
     } else {
-        toast.error("Erro autenticação");
+      alert("Erro autenticação");
     }
   };
 
-  const login = TokenDecodedValue();
-
-
   useEffect(() => {
     async function loadBankInfo() {
+      const token = await AsyncStorage.getItem("@tokenApp");
+      const login = await TokenDecodedValue();
+      const today = new Date().toISOString().slice(0, 10);
       await api
-        .get(`dashboard?fim=${fim}&inicio=${inicio}&login=${login}`, {
+        .get(`dashboard?fim=${today}&inicio=${today}&login=${login}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("@tokenApp"),
+            Authorization: token,
           },
         })
         .then((response) => {
-          dispatch(AddAccountInfos(response.data));
+          //dispatch(AddAccountInfos(response.data));
+          console.log("Today: "+ JSON.stringify(response.data));
         })
         .catch((e) => {
-          localStorage.clear();
-          toast.error("Ops, sua sessão está inspirada.");
-          history.push("/login");
+          alert("Ops, sua sessão está inspirada.");
+          navigation.navigate("login");
         });
-    }
 
-    async function loadAccount() {
       await api
         .get(`/lancamentos/planos-conta?login=${login}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("@tokenApp"),
+            Authorization: token,
           },
         })
         .then((response) => {
-          dispatch(LoadAccountPlans(response.data));
+          //dispatch(LoadAccountPlans(response.data));
+          console.log("Login: "+ JSON.stringify(response.data));
+
         });
     }
-    loadBankInfo();
-    loadAccount();
-  }, [inicio, fim]);
+    loadBankInfo()
+  }, []);
+
 
 
   return (
@@ -104,7 +103,7 @@ const Dashboard: React.FC = () => {
         <ScrollView onTouchStart={() => setToggleSideBar(false)}>
           <Content>
             <ContentTitle>
-              <Title>Olá, Usuário</Title>
+              <Title>Olá, Usuario</Title>
               <TouchableOpacity onPress={() => setToggleSideBar(true)}>
                 <Feather name="user" color="white" size={35} />
               </TouchableOpacity>
