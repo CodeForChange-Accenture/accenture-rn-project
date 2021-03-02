@@ -40,10 +40,10 @@ const DashboardDeposit: React.FC = () => {
     const token = await AsyncStorage.getItem("@tokenApp");
     const valorParaNumero: number = +valor;
     const login = await TokenDecodedValue();
-
+    const today = new Date().toISOString().slice(0, 10);
     const postData = {
       conta: 575,
-      data: "2021-03-01",
+      data: today,
       descricao: descricao,
       login: login,
       planoConta: 1477,
@@ -58,7 +58,7 @@ const DashboardDeposit: React.FC = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          alert("Deposito realizado com sucesso! " + response.status);
+          alert("Deposito realizado com sucesso! ");
         } else {
           alert("Erro no deposito!");
         }

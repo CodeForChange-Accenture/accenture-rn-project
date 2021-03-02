@@ -43,7 +43,7 @@ const DashboardTransfer: React.FC = () => {
   const handleTransaction = async () => {
     const token = await AsyncStorage.getItem("@tokenApp");
     const login = await TokenDecodedValue();
-
+    const today = new Date().toISOString().slice(0, 10);
     if (selectedValue === "credito") {
       setDestino("");
     }
@@ -51,7 +51,7 @@ const DashboardTransfer: React.FC = () => {
     const postData = {
       conta: 575,
       contaDestino: destino,
-      data: "2021-03-01",
+      data: today,
       descricao: descricao,
       login: login,
       planoConta: 1125,
