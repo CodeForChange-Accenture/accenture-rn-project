@@ -48,7 +48,6 @@ padding-bottom: 8px;
 padding-left: 20px;
 font-weight: 500;
 margin-bottom: 25px;
-
 `
 export const Button = styled.Button`
 border-radius: 20px;
