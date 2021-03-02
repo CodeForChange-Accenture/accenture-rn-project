@@ -2,15 +2,19 @@ import React from 'react'
 import styled from 'styled-components/native'
 
 export const SideBar = styled.View`
-background:white;
 position:absolute;
-top: 0px;
-left: 90px;
-bottom: 0px;
-right: 0px;
 z-index: 1;
-padding: 70px 30px;
+height:100%;
+width: 100%;
+left: 80px;
 `
+export const SideBarContent = styled.View`
+padding: 70px 30px;
+background:white;
+height:100%;
+width: 80%;
+`
+
 export const SidebarContentTitle = styled.View `
 justify-content:space-between;
 align-items:center;
