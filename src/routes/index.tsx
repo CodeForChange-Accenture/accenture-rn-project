@@ -18,10 +18,10 @@ export default function Routes() {
         }}
       >
         <Screen name="login" component={Login} />
+        <Screen name="deposit" component={Deposit} />
         <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="dashboard" component={Dashboard} />
         <Screen name="transfer" component={Transfer} />
-        <Screen name="deposit" component={Deposit} />
       </Navigator>
     </NavigationContainer>
   );

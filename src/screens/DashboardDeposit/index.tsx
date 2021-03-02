@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { View, TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import {
   Title,
   Content,
@@ -15,9 +15,43 @@ import {
   Send,
   SendText,
 } from "./style";
+import api from "../../service";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const DashboardDeposit: React.FC = () => {
   const navigation = useNavigation();
+  const [descricao, setDescricao] = useState("");
+  const [valor, setValor] = useState("");
+  var timeInMs = Date.now();
+  const handleDeposit = async () => {
+    const token = await AsyncStorage.getItem("@tokenApp");
+    const valorParaNumero: number = +valor;
+
+    const postData = {
+      conta: 575,
+      data: "2021-03-01",
+      descricao: descricao,
+      login: "castelvani",
+      planoConta: 1477,
+      valor: valorParaNumero,
+    };
+    api
+      .post(`lancamentos`, postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Deposito realizado com sucesso!");
+        } else {
+          alert("Erro no deposito!");
+        }
+      });
+    setDescricao("");
+    setValor("");
+  };
 
   return (
     <React.Fragment>
@@ -35,18 +69,25 @@ const DashboardDeposit: React.FC = () => {
               <CardTitle>Depósitos</CardTitle>
             </CardHead>
             <CardBody>
-              <InputDeposit placeholder="Destinatário" />
-              <InputDeposit placeholder="Plano de conta" />
-              <InputDeposit placeholder="Tipo de transação" />
+              <InputDeposit placeholder="Tipo de transação" value="R" />
+              <InputDeposit
+                placeholder="Descrição"
+                value={descricao}
+                onChangeText={(text) => setDescricao(text)}
+              />
               <InputDeposit
                 placeholder="Valor do depósito"
                 keyboardType="numeric"
+                value={valor}
+                onChangeText={(text) => setValor(text)}
               />
             </CardBody>
             <CardFooter>
               <Send>
-                <SendText>Realizar depósito</SendText>
-                <Feather name="arrow-right" color="white" size={20} />
+                <TouchableOpacity onPress={handleDeposit}>
+                  <SendText>Realizar depósito</SendText>
+                  <Feather name="arrow-right" color="white" size={20} />
+                </TouchableOpacity>
               </Send>
             </CardFooter>
           </Card>
