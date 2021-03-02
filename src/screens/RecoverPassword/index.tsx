@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { ScrollView } from "react-native-gesture-handler";
-import { ContainerRecover, Card, GamabankLogo } from './style'
+import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { ContainerRecover, Card, GamabankLogo, Title, FormRecover } from './style'
 
-
+import logoGama from '../../images/logo-gama.png'
 
 const RecoverPassword: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -12,11 +12,17 @@ const RecoverPassword: React.FC = () => {
 
 
     return (
-        <ScrollView>
             <ContainerRecover>
-                {/* <GamabankLogo source={logoGama}/> */}
-            </ContainerRecover>
-        </ScrollView>
+                <GamabankLogo source={logoGama}/>
+                <View>
+                    <Card>
+                        <Title>Redefinir Senha</Title>
+                        <FormRecover>
+                            <TextInput></TextInput>
+                        </FormRecover>
+                    </Card>
+                </View>
+            </ContainerRecover> 
     );
 };
 

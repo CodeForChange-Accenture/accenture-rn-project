@@ -18,8 +18,9 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="login" component={Login} />
         <Screen name="recover password" component={RecoverPassword}/>
+        <Screen name="login" component={Login} />
+               
         <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="dashboard" component={Dashboard} />
         <Screen name="transfer" component={Transfer} />
