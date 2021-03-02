@@ -1,14 +1,11 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
-
-/* const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height; */
 
 export const Container = styled.View`
 background: #8C52E5;
+height: 100%;
+padding-bottom: 30px;
 align-items: center;
-flex: 1;
 `
 export const LogoGame = styled.Image`
   margin-top: 86px;
@@ -37,8 +34,8 @@ font-family: Roboto;
 font-weight: 500;
 font-size: 14px;
 padding-bottom: 10px;
-margin-bottom: 30px; 
 `
+
 export const TextInput = styled.TextInput`
 border: none;
 font-size: 14px;
@@ -65,3 +62,5 @@ export const ButtonLink = styled.TouchableOpacity`
 margin-top: 15px;
 align-items: center;
 `
+
+
