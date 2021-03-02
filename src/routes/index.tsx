@@ -7,6 +7,7 @@ import Transfer from "../screens/DashboardTransfer";
 import Deposit from "../screens/DashboardDeposit";
 import LoginRegister from "../screens/LoginRegister";
 import Login from "../screens/LoginHome";
+import AccountCreated from "../screens/AccountCreated";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,8 +19,9 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="login" component={LoginHome} />
+        <Screen name="login" component={Login} />
         <Screen name="register" component={LoginRegister} />
+        <Screen name="register-success" component={AccountCreated} />
         <Screen name="dashboard" component={Dashboard} />
         <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="transfer" component={Transfer} />
