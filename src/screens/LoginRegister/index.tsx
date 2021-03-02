@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { View, Text, Alert, ScrollView } from "react-native";
-import { Card, CardTitle, Container, Form, TextInput, LogoGame , Button} from "./style";
+import { Card, CardTitle, Container, Form, TextInput, LogoGame, SubmitButton, SubmitText, ButtonLink} from "./style";
 import { useForm } from "react-hook-form";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import logoGama from "../../images/logo-gama.png";
 import styled from "styled-components";
@@ -19,6 +21,7 @@ export default function Register(/* data: Inputs */) {
   };
 
 const { register, handleSubmit, setValue } = useForm();
+const navigation = useNavigation();
 
 useEffect(() => {
     register('cpf');
@@ -58,10 +61,14 @@ useEffect(() => {
               onChangeText={Text => {setValue('confirmPassword', Text)}}
               placeholder="Confirme sua senha"
             />
-            <Button 
-            onPress={handleSubmit(onSubmit)} 
-            title='Continuar'>
-            </Button>
+            <SubmitButton 
+              onPress={handleSubmit(onSubmit)} >
+              <SubmitText>Continuar</SubmitText>
+              <Feather name="arrow-right" color="white" size={20} />
+            </SubmitButton>
+            <ButtonLink onPress={() => navigation.navigate("login")}>
+              <Text style={{ color: "blue" }}> Voltar para login</Text>
+            </ButtonLink>
           </Form>
         </Card>
       </View>
