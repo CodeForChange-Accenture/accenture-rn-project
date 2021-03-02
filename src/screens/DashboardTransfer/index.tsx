@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { View, TouchableOpacity, Text } from "react-native";
+import { Picker } from "@react-native-community/picker";
 import {
   Title,
   Content,
@@ -15,10 +16,70 @@ import {
   Send,
   SendText,
 } from "./style";
+import api from "../../service";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt_decode from "jwt-decode";
+import { IUser } from "../../interfaces";
+
 const DashboardTransfer: React.FC = () => {
   const navigation = useNavigation();
+  const [selectedValue, setSelectedValue] = useState<any>();
+  const [tipoMovimento, setTipoMovimento] = useState("");
+  const [destino, setDestino] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [valor, setValor] = useState("");
+  const TokenDecodedValue = async () => {
+    const TokenStorage = await AsyncStorage.getItem("@tokenApp");
+    if (TokenStorage) {
+      const TokenArr = TokenStorage.split(" ");
+      const TokenDecode = TokenArr[1];
+      const decoded = jwt_decode<IUser>(TokenDecode);
+      return decoded.sub;
+    } else {
+      alert("Erro autenticação");
+    }
+  };
+  const handleTransaction = async () => {
+    const token = await AsyncStorage.getItem("@tokenApp");
+    const login = await TokenDecodedValue();
 
+    if (selectedValue === "credito") {
+      setDestino("");
+    }
+
+    const postData = {
+      conta: 575,
+      contaDestino: destino,
+      data: "2021-03-01",
+      descricao: descricao,
+      login: login,
+      planoConta: 1125,
+      valor: valor,
+    };
+
+    api
+      .post(`lancamentos`, postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Transação realizada com sucesso!");
+        } else {
+          alert("Erro na transação");
+        }
+      })
+      .catch(() => {
+        alert("Erro na transação");
+      });
+
+    setDestino("");
+    setDescricao("");
+    setValor("");
+  };
   return (
     <React.Fragment>
       <TransferContainer>
@@ -35,19 +96,42 @@ const DashboardTransfer: React.FC = () => {
               <CardTitle>Transferências</CardTitle>
             </CardHead>
             <CardBody>
-              <InputTransfer placeholder="Destinatário" />
-              <InputTransfer placeholder="Plano de conta a debitar" />
-              <InputTransfer placeholder="Tipo de transação" />
+              <Picker
+                selectedValue={selectedValue}
+                style={{ height: 50, width: 300 }}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }
+              >
+                <Picker.Item label="Conta crédito" value="credito" />
+                <Picker.Item label="Usuário" value="usuario" />
+              </Picker>
+              {selectedValue === "usuario" && (
+                <InputTransfer
+                  placeholder="Destinatário"
+                  value={destino}
+                  onChangeText={(text) => setDestino(text)}
+                />
+              )}
+              <InputTransfer
+                placeholder="Descrição"
+                value={descricao}
+                onChangeText={(text) => setDescricao(text)}
+              />
               <InputTransfer
                 placeholder="Valor da tranferência"
                 keyboardType="numeric"
+                value={valor}
+                onChangeText={(text) => setValor(text)}
               />
             </CardBody>
             <CardFooter>
-              <Send>
-                <SendText>Realizar tranferência</SendText>
-                <Feather name="arrow-right" color="white" size={20} />
-              </Send>
+              <TouchableOpacity onPress={handleTransaction}>
+                <Send>
+                  <SendText>Realizar tranferência</SendText>
+                  <Feather name="arrow-right" color="white" size={20} />
+                </Send>
+              </TouchableOpacity>
             </CardFooter>
           </Card>
         </Content>
