@@ -81,8 +81,6 @@ const DashboardTransfer: React.FC = () => {
         if (response.status === 200) {
           alert("Transação realizada com sucesso!");
           dispatch(ReloadAccountRemove(valorParaNumero));
-          console.log(tipoMovimento[0].tipoMovimento);
-
           setDestino("");
         } else {
           alert("Erro na transação");

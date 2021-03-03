@@ -15,7 +15,6 @@ const DashboardLancamentos: React.FC = () => {
   const handleDateInicio = (selectedDate: any) => {
     const currentDate = selectedDate || dateInicio;
     setDateInicio(currentDate);
-    console.log(dateInicio);
   };
 
   const showDatepicker = () => {
