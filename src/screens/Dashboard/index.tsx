@@ -27,7 +27,6 @@ const Dashboard: React.FC = () => {
   const today = new Date().toISOString().slice(0, 10);
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [navSelected, setNavSelected] = useState("");
-  const [bankAction, setBankAction] = useState("");
   const [inicio, setInicio] = useState(today);
   const [fim, setFim] = useState(today);
 
@@ -47,38 +46,37 @@ const Dashboard: React.FC = () => {
       alert("Erro autenticação");
     }
   };
+  async function loadBankInfo() {
+    const token = await AsyncStorage.getItem("@tokenApp");
+    const login = await TokenDecodedValue();
 
+    await api
+      .get(`dashboard?fim=${fim}&inicio=${inicio}&login=${login}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        dispatch(AddAccountInfos(response.data));
+      })
+      .catch((e) => {
+        alert("Ops, sua sessão está inspirada.");
+        navigation.navigate("login");
+      });
+
+    await api
+      .get(`/lancamentos/planos-conta?login=${login}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        dispatch(LoadAccountPlans(response.data));
+      });
+  }
   useEffect(() => {
-    async function loadBankInfo() {
-      const token = await AsyncStorage.getItem("@tokenApp");
-      const login = await TokenDecodedValue();
-
-      await api
-        .get(`dashboard?fim=${fim}&inicio=${inicio}&login=${login}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        })
-        .then((response) => {
-          dispatch(AddAccountInfos(response.data));
-        })
-        .catch((e) => {
-          alert("Ops, sua sessão está inspirada.");
-          navigation.navigate("login");
-        });
-
-      await api
-        .get(`/lancamentos/planos-conta?login=${login}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        })
-        .then((response) => {
-          dispatch(LoadAccountPlans(response.data));
-        });
-    }
     loadBankInfo();
   }, []);
   return (
@@ -147,7 +145,10 @@ const Dashboard: React.FC = () => {
             )}
           </Content>
         </ScrollView>
-        <BottomNavigation setNavSelected={setNavSelected} />
+        <BottomNavigation
+          setNavSelected={setNavSelected}
+          loadBankInfo={loadBankInfo}
+        />
       </DashboardContainer>
     </React.Fragment>
   );
