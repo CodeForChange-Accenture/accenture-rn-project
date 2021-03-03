@@ -19,11 +19,17 @@ import api from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
-import { IUser } from "../../interfaces";
+import { IBank, IUser } from "../../interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { ReloadAccountAdd } from "../../store/modules/action";
 const DashboardDeposit: React.FC = () => {
   const navigation = useNavigation();
   const [descricao, setDescricao] = useState("");
   const [valor, setValor] = useState("");
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: IBank) => state);
+
   const TokenDecodedValue = async () => {
     const TokenStorage = await AsyncStorage.getItem("@tokenApp");
     if (TokenStorage) {
@@ -41,12 +47,17 @@ const DashboardDeposit: React.FC = () => {
     const valorParaNumero: number = +valor;
     const login = await TokenDecodedValue();
     const today = new Date().toISOString().slice(0, 10);
+
+    const tipoMovimento = state.plan.filter(
+      (state) => state.tipoMovimento === "R"
+    );
+
     const postData = {
-      conta: 575,
+      conta: state.banco.contaBanco.id,
       data: today,
       descricao: descricao,
       login: login,
-      planoConta: 1477,
+      planoConta: tipoMovimento[0].id,
       valor: valorParaNumero,
     };
     api
@@ -59,6 +70,7 @@ const DashboardDeposit: React.FC = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Deposito realizado com sucesso! ");
+          dispatch(ReloadAccountAdd(valorParaNumero));
         } else {
           alert("Erro no deposito!");
         }
