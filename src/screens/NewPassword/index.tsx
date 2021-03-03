@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { Text, View, Alert } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import api from "../../service";
@@ -33,7 +32,7 @@ const NewPassword: React.FC = () => {
     };
 
     if (email == "" || user == "") {
-      alert("Preencha todos os campos");
+      Alert.alert("Erro!", "Preencha todos os campos");
     } else {
       api
         .post(`nova-senha`, postData)
@@ -44,7 +43,7 @@ const NewPassword: React.FC = () => {
           }
         })
         .catch((e) => {
-          alert(e);
+          Alert.alert("Erro!", "Erro ao recuperar senha!");
         });
     }
   }

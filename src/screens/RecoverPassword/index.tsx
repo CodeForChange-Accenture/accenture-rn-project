@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { Alert, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -35,7 +34,7 @@ const RecoverPassword: React.FC = () => {
     };
 
     if (newPass === "" || newPass !== confirmPass || confirmPass === "") {
-      alert("Senhas não conferem");
+      Alert.alert("Erro!", "Senhas não conferem");
       return;
     } else {
       api
@@ -43,11 +42,11 @@ const RecoverPassword: React.FC = () => {
           params: { senhaTemporaria: senhaTemporaria },
         })
         .then(() => {
-          alert("Senha alterada com sucesso!");
+          Alert.alert("Senha alterada com sucesso!");
           navigation.navigate("login");
         })
         .catch((e) => {
-          alert(e);
+          Alert.alert("Erro!", "Erro ao recuperar senha!");
         });
     }
   }

@@ -21,8 +21,8 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-        <Screen name="login" component={Login} />
         <Screen name="splashscreen" component={SplashScreen} />
+        <Screen name="login" component={Login} />
         <Screen name="newPassword" component={NewPassword} />
         <Screen name="recoverPassword" component={RecoverPassword} />
         <Screen name="deposit" component={Deposit} />

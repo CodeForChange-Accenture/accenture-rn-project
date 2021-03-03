@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  ScrollView,
-  TouchableOpacity,
   Text,
   Alert,
 } from "react-native";
@@ -53,7 +51,7 @@ const Login: React.FC = () => {
         navigation.navigate("dashboard");
       })
       .catch(() => {
-        Alert.alert("Erro!", "Usuário ou senha inválidos.")
+        Alert.alert("Erro!", "Usuário ou senha inválidos!")
       });
   }
 

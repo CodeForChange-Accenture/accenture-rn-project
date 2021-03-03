@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { View, TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Alert } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import {
   Title,
@@ -47,7 +47,7 @@ const DashboardTransfer: React.FC = () => {
       const decoded = jwt_decode<IUser>(TokenDecode);
       return decoded.sub;
     } else {
-      alert("Erro autenticação");
+      Alert.alert("Erro autenticação");
     }
   };
   const handleTransactionUser = async () => {
@@ -59,7 +59,9 @@ const DashboardTransfer: React.FC = () => {
     const tipoMovimento = state.plan.filter(
       (state) => state.tipoMovimento === "TU"
     );
-
+    if (valorParaNumero <= 0) {
+      return Alert.alert("Erro na transação", "Valores inválidos");
+    }
     const postData = {
       conta: state.banco.contaBanco.id,
       contaDestino: destino,
@@ -79,15 +81,15 @@ const DashboardTransfer: React.FC = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          alert("Transação realizada com sucesso!");
+          Alert.alert("Transação realizada com sucesso!");
           dispatch(ReloadAccountRemove(valorParaNumero));
           setDestino("");
         } else {
-          alert("Erro na transação");
+          Alert.alert("Erro na transação", "Valores inválidos");
         }
       })
       .catch(() => {
-        alert("Erro na transação");
+        Alert.alert("Erro na transação", "Valores inválidos");
       });
 
     setDescricao("");
@@ -103,7 +105,9 @@ const DashboardTransfer: React.FC = () => {
     const tipoMovimento = state.plan.filter(
       (state) => state.tipoMovimento === "TC"
     );
-
+    if (valorParaNumero <= 0) {
+      return Alert.alert("Erro na transação", "Valores inválidos");
+    }
     const postData = {
       conta: state.banco.contaBanco.id,
       contaDestino: destino,
@@ -123,14 +127,14 @@ const DashboardTransfer: React.FC = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          alert("Transação realizada com sucesso!");
+          Alert.alert("Transação realizada com sucesso!");
           dispatch(ReloadAccountCredit(valorParaNumero));
         } else {
-          alert("Erro na transação");
+          Alert.alert("Erro na transação", "Valores inválidos");
         }
       })
       .catch(() => {
-        alert("Erro na transação");
+        Alert.alert("Erro na transação", "Valores inválidos");
       });
 
     setDestino("");
