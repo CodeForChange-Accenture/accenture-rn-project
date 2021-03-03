@@ -1,11 +1,15 @@
 export interface IUser {
-    idUsuario: number;
-    sub: string;
+    idUsuario?: number;
+    sub?: string;
+    cpf: string;
+    login: string;
+    nome: string;
   }
 
   export interface IBank {
     plan: IPlan[]
     banco: IDataAccount
+    user: IUser
   }
   
   

@@ -35,7 +35,14 @@ const INITIAL_STATE: IBank = {
         login: "",
         tipoMovimento: "",
         padrao: true
-    }]
+    }],
+    user: {
+        idUsuario: 0,
+        sub: "",
+        cpf: "",
+        login: "",
+        nome: "",
+    }
 }
 
 const AccountAct: Reducer<any> = (state = INITIAL_STATE, action) => {
@@ -44,6 +51,10 @@ const AccountAct: Reducer<any> = (state = INITIAL_STATE, action) => {
             const {banco} = action.payload
             return {...state,banco}
         }
+        case "ADD_USER_INFO": {
+            const {user} = action.payload
+            return {...state,user}
+        }        
         case "LOAD_ACCOUNT_PLANS":{
             const {plan} = action.payload  
             return {...state,plan}

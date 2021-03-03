@@ -20,12 +20,15 @@ import {
 import api from "../../service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
-
+import { AddUserInfos } from "../../store/modules/action";
 import logoGama from "../../images/logo-gama.png";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +44,7 @@ const Login: React.FC = () => {
       .post(`login`, postData)
       .then((response) => {
         AsyncStorage.setItem("@tokenApp", response.data.token);
+        dispatch(AddUserInfos(response.data.usuario));
         navigation.navigate("dashboard");
       })
       .catch((e) => {

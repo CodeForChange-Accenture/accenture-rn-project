@@ -1,10 +1,19 @@
-import { IBank } from "../../interfaces"
+import { IBank, IUser } from "../../interfaces"
 
 export function AddAccountInfos(banco: IBank){
     return{
         type: "ADD_ACCOUNT_INFO",
         payload:{
             banco
+        }
+    }
+}
+
+export function AddUserInfos (user:IUser){
+    return{
+        type: "ADD_USER_INFO",
+        payload:{
+            user
         }
     }
 }

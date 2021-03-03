@@ -37,15 +37,13 @@ export default function Sidebar({
             </SidebarContentTitle>
             <View>
               <SidebarInfo>Seu nome:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-              <SidebarInfo>Email:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.user.nome}</UserInfo>
 
               <SidebarInfo>Username:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.user.login}</UserInfo>
 
               <SidebarInfo>CPF:</SidebarInfo>
-              <UserInfo>000.000.000.00</UserInfo>
+              <UserInfo>{state.user.cpf}</UserInfo>
 
               <Division />
               <SidebarInfo>Você tem:</SidebarInfo>
