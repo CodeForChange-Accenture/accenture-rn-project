@@ -135,7 +135,13 @@ const Dashboard: React.FC = () => {
                   {state.banco.contaBanco.lancamentos.map(
                     (lancamentos, index) => (
                       <Historic key={index}>
-                        <Balance>{lancamentos.valor.toFixed(2)}</Balance>
+                        {+lancamentos.valor.toFixed(2) < 0 ? (
+                          <Balance style={{ color: "red" }}>
+                            {lancamentos.valor.toFixed(2)}
+                          </Balance>
+                        ) : (
+                          <Balance>{lancamentos.valor.toFixed(2)}</Balance>
+                        )}
                         <CardSubTitle>{lancamentos.data}</CardSubTitle>
                       </Historic>
                     )

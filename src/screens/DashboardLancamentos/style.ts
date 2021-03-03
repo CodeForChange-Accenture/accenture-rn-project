@@ -28,11 +28,12 @@ flex-direction:row;
 `
 
 export const DateInputText = styled.Text`
-padding: 10px;
-margin: 0 10px;
+margin: 10px 15px;
 color: #333333;
-border: 1px solid #B9B9B9;
-border-radius: 10px;
+border: 2px solid transparent;
+border-bottom-color: #B9B9B9;
+color:  #a8a8a8;
+font-weight:bold;
 `
 
 export const Historic = styled.View`
