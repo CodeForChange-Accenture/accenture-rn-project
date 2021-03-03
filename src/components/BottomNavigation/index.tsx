@@ -7,9 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 
 type BottomNavState = {
   setNavSelected: Function;
+  loadBankInfo: Function;
 };
 
-export default function BottomNavigation({ setNavSelected }: BottomNavState) {
+export default function BottomNavigation({
+  setNavSelected,
+  loadBankInfo,
+}: BottomNavState) {
+  const today = new Date().toISOString().slice(0, 10);
   const navigation = useNavigation();
 
   const handleTransfer = () => {
@@ -40,7 +45,11 @@ export default function BottomNavigation({ setNavSelected }: BottomNavState) {
           <NavOptionTitle>Depositar</NavOptionTitle>
         </NavOption>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setNavSelected("")}>
+      <TouchableOpacity
+        onPress={() => {
+          setNavSelected(""), loadBankInfo();
+        }}
+      >
         <NavOption>
           <Feather name="dollar-sign" color="white" size={35} />
           <NavOptionTitle>Planos</NavOptionTitle>

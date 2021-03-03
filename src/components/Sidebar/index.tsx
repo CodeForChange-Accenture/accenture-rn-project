@@ -11,7 +11,10 @@ import {
 } from "./style";
 import { TouchableOpacity, ScrollView, View } from "react-native";
 import * as Animatable from "react-native-animatable";
-
+import { useSelector } from "react-redux";
+import { IBank } from "../../interfaces";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 type SidebarState = {
   setToggleSideBar: Function;
   toggleSideBar?: boolean;
@@ -21,9 +24,16 @@ export default function Sidebar({
   setToggleSideBar,
   toggleSideBar,
 }: SidebarState) {
+  const state = useSelector((state: IBank) => state);
+  const navigation = useNavigation();
+  const handleLogout = async () => {
+    AsyncStorage.clear();
+    navigation.navigate("login");
+  };
+
   return (
     <SideBar>
-      <Animatable.View animation="fadeInRight" easing="ease-out" duration={500}>
+      <Animatable.View animation="fadeInRight" easing="ease-out" duration={800}>
         <SideBarContent>
           <ScrollView>
             <SidebarContentTitle>
@@ -34,20 +44,24 @@ export default function Sidebar({
             </SidebarContentTitle>
             <View>
               <SidebarInfo>Seu nome:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
-              <SidebarInfo>Email:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.user.nome}</UserInfo>
 
               <SidebarInfo>Username:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.user.login}</UserInfo>
 
               <SidebarInfo>CPF:</SidebarInfo>
-              <UserInfo>000.000.000.00</UserInfo>
+              <UserInfo>{state.user.cpf}</UserInfo>
 
               <Division />
               <SidebarInfo>Você tem:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.plan.length} planos de conta</UserInfo>
             </View>
+            <Division />
+            <SidebarContentTitle>
+              <TouchableOpacity onPress={handleLogout}>
+                <Feather name="log-out" color="#8C52E5" size={35} />
+              </TouchableOpacity>
+            </SidebarContentTitle>
           </ScrollView>
         </SideBarContent>
       </Animatable.View>
