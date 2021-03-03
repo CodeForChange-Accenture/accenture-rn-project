@@ -8,6 +8,7 @@ import Deposit from "../screens/DashboardDeposit";
 import LoginRegister from "../screens/LoginRegister";
 import Login from "../screens/LoginHome";
 import RecoverPassword from "../screens/RecoverPassword"
+import NewPassword from "../screens/NewPassword"
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -19,14 +20,14 @@ export default function Routes() {
           headerShown: false,
         }}
       >
-         
+        <Screen name="newPassword" component={NewPassword}/>
+        <Screen name="recoverPassword" component={RecoverPassword}/>
+       
         <Screen name="login" component={Login} />
-        <Screen name="recover password" component={RecoverPassword}/> 
         <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="deposit" component={Deposit} />
         <Screen name="register" component={LoginRegister} />
         <Screen name="dashboard" component={Dashboard} />
-        <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="transfer" component={Transfer} />
       </Navigator>
     </NavigationContainer>

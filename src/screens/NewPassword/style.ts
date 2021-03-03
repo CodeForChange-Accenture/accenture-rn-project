@@ -45,7 +45,7 @@ margin-bottom: 25px;
 border: 2px solid white;
 border-bottom-color: #878686;
 `
-export const SubmitButton = styled.TouchableOpacity` 
+export const Button = styled.Button`
 padding: 12px;
 flex-direction: row;
 align-items: center;
@@ -53,14 +53,9 @@ justify-content: space-between;
 background-color: #68DE5A;
 border-radius: 20px;
 `
-export const SubmitText = styled.Text`
-color: #fff;
-font-size: 18px;
-`
 export const TextLink =  styled.TouchableOpacity`
 margin-top: 15px;
 align-items: center;
 color:#1b08c4;
-font-family: Roboto;
 `
 
