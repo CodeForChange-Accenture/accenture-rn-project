@@ -29,7 +29,13 @@ type Inputs = {
 
 export default function Register() {
   const navigation = useNavigation();
-  const { register, handleSubmit, setValue, errors, getValues } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    getValues,
+  } = useForm<Inputs>();
   const [cpf, setCpf] = useState("");
 
   useEffect(() => {
@@ -42,11 +48,6 @@ export default function Register() {
       validate: (value) => value === getValues("password"),
     });
   }, [register]);
-
-  const onSubmit = (data: any) => {
-    Alert.alert("Form Data", data);
-    console.log(data);
-  };
 
   function createAccount(data: Inputs) {
     const postData = {
@@ -62,11 +63,11 @@ export default function Register() {
         if (response.status === 200) {
           navigation.navigate("register-success");
         } else {
-          alert("Erro no cadastro!");
+          Alert.alert("Erro!", "Erro no cadastro!");
         }
       })
       .catch(() => {
-        alert("Algo deu errado!");
+        Alert.alert("Erro!", "Algo deu errado!");
       });
   }
 

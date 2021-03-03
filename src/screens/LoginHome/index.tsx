@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   Dimensions,
+  Alert,
 } from "react-native";
 import {
   Card,
@@ -48,7 +49,7 @@ const Login: React.FC = () => {
         navigation.navigate("dashboard");
       })
       .catch((e) => {
-        alert(e);
+        Alert.alert("Erro!", "Usuário ou senha inválidos!");
       });
   }
 

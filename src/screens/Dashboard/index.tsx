@@ -2,7 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import BottomNavigation from "../../components/BottomNavigation";
 import Sidebar from "../../components/Sidebar";
@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
       const decoded = jwt_decode<IUser>(TokenDecode);
       return decoded.sub;
     } else {
-      alert("Erro autenticação");
+      Alert.alert("Erro!", "Erro na autenticação");
     }
   };
   async function loadBankInfo() {
@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
         dispatch(AddAccountInfos(response.data));
       })
       .catch((e) => {
-        alert("Ops, sua sessão está inspirada.");
+        Alert.alert("Erro!", "Ops, sua sessão está expirada.");
         navigation.navigate("login");
       });
 

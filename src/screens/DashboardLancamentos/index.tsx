@@ -11,7 +11,7 @@ import {
   DateSelecting,
 } from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AddAccountInfos } from "../../store/modules/action";
 import { IBank, IUser } from "../../interfaces";
@@ -63,7 +63,7 @@ const DashboardLancamentos: React.FC = () => {
       const decoded = jwt_decode<IUser>(TokenDecode);
       return decoded.sub;
     } else {
-      alert("Erro autenticação");
+      Alert.alert("Erro!", "Erro na autenticação");
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+import { Alert, TouchableOpacity } from "react-native";
 import {
   Title,
   Content,
@@ -38,7 +38,7 @@ const DashboardDeposit: React.FC = () => {
       const decoded = jwt_decode<IUser>(TokenDecode);
       return decoded.sub;
     } else {
-      alert("Erro autenticação");
+      Alert.alert("Erro!", "Erro na autenticação");
     }
   };
 
@@ -69,14 +69,14 @@ const DashboardDeposit: React.FC = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          alert("Deposito realizado com sucesso! ");
+          Alert.alert("Deposito realizado com sucesso!");
           dispatch(ReloadAccountAdd(valorParaNumero));
         } else {
-          alert("Erro no deposito!");
+          Alert.alert("Erro na transação", "Valores inválidos");
         }
       })
       .catch(() => {
-        alert("Erro no deposito!");
+        Alert.alert("Erro na transação", "Valores inválidos");
       });
     setDescricao("");
     setValor("");
