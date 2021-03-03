@@ -11,6 +11,8 @@ import {
 } from "./style";
 import { TouchableOpacity, ScrollView, View } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { useSelector } from "react-redux";
+import { IBank } from "../../interfaces";
 
 type SidebarState = {
   setToggleSideBar: Function;
@@ -21,6 +23,7 @@ export default function Sidebar({
   setToggleSideBar,
   toggleSideBar,
 }: SidebarState) {
+  const state = useSelector((state: IBank) => state);
   return (
     <SideBar>
       <Animatable.View animation="fadeInRight" easing="ease-out" duration={800}>
@@ -46,7 +49,7 @@ export default function Sidebar({
 
               <Division />
               <SidebarInfo>Você tem:</SidebarInfo>
-              <UserInfo>Nome</UserInfo>
+              <UserInfo>{state.plan.length} planos de conta</UserInfo>
             </View>
           </ScrollView>
         </SideBarContent>

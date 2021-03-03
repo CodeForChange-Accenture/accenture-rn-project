@@ -4,12 +4,14 @@ import { Feather } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Card, CardTitle, Balance, Historic, CardSubTitle } from "./style";
 import { Button, View } from "react-native";
+import { useSelector } from "react-redux";
+import { IBank } from "../../interfaces";
 
 const DashboardLancamentos: React.FC = () => {
   const [dateInicio, setDateInicio] = useState<Date>(new Date(1598051730000));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-
+  const state = useSelector((state: IBank) => state);
   const handleDateInicio = (selectedDate: any) => {
     const currentDate = selectedDate || dateInicio;
     setDateInicio(currentDate);
@@ -26,49 +28,13 @@ const DashboardLancamentos: React.FC = () => {
         <Feather name="dollar-sign" color="#B9B9B9" size={20} /> Últimos
         lançamentos
       </CardTitle>
-      {/* <View>
-        <View>
-          <Button onPress={showDatepicker} title="Show date picker!" />
-        </View>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={new Date(1598051730000)}
-            is24Hour={true}
-            display="default"
-            onChange={handleDateInicio}
-          />
-        )}
-      </View> */}
       <ScrollView>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
-        <Historic>
-          <Balance>R$:1.890,00</Balance>
-          <CardSubTitle>11 de Fev</CardSubTitle>
-        </Historic>
+        {state.banco.contaBanco.lancamentos.map((lancamentos, index) => (
+          <Historic key={index}>
+            <Balance>{lancamentos.valor.toFixed(2)}</Balance>
+            <CardSubTitle>{lancamentos.data}</CardSubTitle>
+          </Historic>
+        ))}
       </ScrollView>
     </Card>
   );
