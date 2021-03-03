@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 
@@ -8,25 +7,22 @@ import { useNavigation } from "@react-navigation/native";
 
 type BottomNavState = {
   setNavSelected: Function;
+  loadBankInfo: Function;
 };
 
-export default function BottomNavigation({ setNavSelected }: BottomNavState) {
+export default function BottomNavigation({
+  setNavSelected,
+  loadBankInfo,
+}: BottomNavState) {
+  const today = new Date().toISOString().slice(0, 10);
   const navigation = useNavigation();
 
   const handleTransfer = () => {
     navigation.navigate("transfer");
   };
 
-  const handleHistoric = () => {
-    navigation.navigate("historic");
-  };
-
   const handleDeposit = () => {
     navigation.navigate("deposit");
-  };
-
-  const handlePlans = () => {
-    navigation.navigate("plans");
   };
 
   return (
@@ -49,7 +45,11 @@ export default function BottomNavigation({ setNavSelected }: BottomNavState) {
           <NavOptionTitle>Depositar</NavOptionTitle>
         </NavOption>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handlePlans}>
+      <TouchableOpacity
+        onPress={() => {
+          setNavSelected(""), loadBankInfo();
+        }}
+      >
         <NavOption>
           <Feather name="dollar-sign" color="white" size={35} />
           <NavOptionTitle>Planos</NavOptionTitle>

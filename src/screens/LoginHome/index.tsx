@@ -15,17 +15,20 @@ import {
   LogoGame,
   SubmitButton,
   SubmitText,
-  ButtonLink
+  ButtonLink,
 } from "./style";
 import api from "../../service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather } from "@expo/vector-icons";
-
+import { AddUserInfos } from "../../store/modules/action";
 import logoGama from "../../images/logo-gama.png";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +44,7 @@ const Login: React.FC = () => {
       .post(`login`, postData)
       .then((response) => {
         AsyncStorage.setItem("@tokenApp", response.data.token);
+        dispatch(AddUserInfos(response.data.usuario));
         navigation.navigate("dashboard");
       })
       .catch((e) => {
@@ -68,7 +72,7 @@ const Login: React.FC = () => {
               <SubmitText>Continuar</SubmitText>
               <Feather name="arrow-right" color="white" size={20} />
             </SubmitButton>
-            <ButtonLink onPress={() => navigation.navigate("dashboard")}>
+            <ButtonLink onPress={() => navigation.navigate("newPassword")}>
               <Text style={{ color: "blue" }}>Esqueci minha senha</Text>
             </ButtonLink>
             <ButtonLink onPress={() => navigation.navigate("register")}>

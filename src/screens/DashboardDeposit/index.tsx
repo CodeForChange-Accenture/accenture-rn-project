@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { View, TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import {
   Title,
   Content,
@@ -15,9 +15,72 @@ import {
   Send,
   SendText,
 } from "./style";
+import api from "../../service";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt_decode from "jwt-decode";
+import { IBank, IUser } from "../../interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { ReloadAccountAdd } from "../../store/modules/action";
 const DashboardDeposit: React.FC = () => {
   const navigation = useNavigation();
+  const [descricao, setDescricao] = useState("");
+  const [valor, setValor] = useState("");
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: IBank) => state);
+
+  const TokenDecodedValue = async () => {
+    const TokenStorage = await AsyncStorage.getItem("@tokenApp");
+    if (TokenStorage) {
+      const TokenArr = TokenStorage.split(" ");
+      const TokenDecode = TokenArr[1];
+      const decoded = jwt_decode<IUser>(TokenDecode);
+      return decoded.sub;
+    } else {
+      alert("Erro autenticação");
+    }
+  };
+
+  const handleDeposit = async () => {
+    const token = await AsyncStorage.getItem("@tokenApp");
+    const valorParaNumero: number = +valor;
+    const login = await TokenDecodedValue();
+    const today = new Date().toISOString().slice(0, 10);
+
+    const tipoMovimento = state.plan.filter(
+      (state) => state.tipoMovimento === "R"
+    );
+
+    const postData = {
+      conta: state.banco.contaBanco.id,
+      data: today,
+      descricao: descricao,
+      login: login,
+      planoConta: tipoMovimento[0].id,
+      valor: valorParaNumero,
+    };
+    api
+      .post(`lancamentos`, postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Deposito realizado com sucesso! ");
+          dispatch(ReloadAccountAdd(valorParaNumero));
+        } else {
+          alert("Erro no deposito!");
+        }
+      })
+      .catch(() => {
+        alert("Erro no deposito!");
+      });
+    setDescricao("");
+    setValor("");
+  };
 
   return (
     <React.Fragment>
@@ -35,19 +98,25 @@ const DashboardDeposit: React.FC = () => {
               <CardTitle>Depósitos</CardTitle>
             </CardHead>
             <CardBody>
-              <InputDeposit placeholder="Destinatário" />
-              <InputDeposit placeholder="Plano de conta" />
-              <InputDeposit placeholder="Tipo de transação" />
+              <InputDeposit
+                placeholder="Descrição"
+                value={descricao}
+                onChangeText={(text) => setDescricao(text)}
+              />
               <InputDeposit
                 placeholder="Valor do depósito"
                 keyboardType="numeric"
+                value={valor}
+                onChangeText={(text) => setValor(text)}
               />
             </CardBody>
             <CardFooter>
-              <Send>
-                <SendText>Realizar depósito</SendText>
-                <Feather name="arrow-right" color="white" size={20} />
-              </Send>
+              <TouchableOpacity onPress={handleDeposit}>
+                <Send>
+                  <SendText>Realizar depósito</SendText>
+                  <Feather name="arrow-right" color="white" size={20} />
+                </Send>
+              </TouchableOpacity>
             </CardFooter>
           </Card>
         </Content>

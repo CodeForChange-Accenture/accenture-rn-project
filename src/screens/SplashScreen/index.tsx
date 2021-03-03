@@ -1,13 +1,19 @@
 import React from "react";
-import { Text } from "react-native";
+import { Image } from "react-native";
 import { SplashMain } from "./style";
-
-// import { Container } from './styles';
+import logoGama from "../../images/logo-gama.png";
+import { useNavigation } from "@react-navigation/native";
 
 const SplashScreen: React.FC = () => {
+  const navigation = useNavigation();
+  {
+    setTimeout(() => {
+      navigation.navigate("login");
+    }, 1500);
+  }
   return (
     <SplashMain>
-      <Text>Teste</Text>
+      <Image source={logoGama} />
     </SplashMain>
   );
 };
