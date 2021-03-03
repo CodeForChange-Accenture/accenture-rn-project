@@ -15,7 +15,7 @@ export const Card = styled.View`
 background-color:white;
 margin: 30px;
 margin-top: 75px;
-max-width: 100%;
+min-width: 85%;
 border-radius: 10px;
 padding: 37px;
 `
@@ -35,7 +35,7 @@ font-size: 14px;
 padding-bottom: 10px;
 margin-bottom: 30px; 
 `
-export const TextInput = styled.TextInput`
+export const TextInputPass = styled.TextInput`
 border: none;
 font-size: 14px;
 line-height: 14px;

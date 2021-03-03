@@ -68,7 +68,7 @@ const Login: React.FC = () => {
               <SubmitText>Continuar</SubmitText>
               <Feather name="arrow-right" color="white" size={20} />
             </SubmitButton>
-            <ButtonLink onPress={() => navigation.navigate("recoverPassword")}>
+            <ButtonLink onPress={() => navigation.navigate("newPassword")}>
               <Text style={{ color: "blue" }}>Esqueci minha senha</Text>
             </ButtonLink>
             <ButtonLink onPress={() => navigation.navigate("register")}>

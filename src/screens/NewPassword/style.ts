@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native'
 
 export const ContainerRecover = styled.View`
-background-color:#8C52E5;
+background: #8C52E5;
 align-items: center;
 flex: 1;
 `
@@ -15,9 +15,21 @@ export const Card = styled.View`
 background-color:white;
 margin: 30px;
 margin-top: 75px;
-max-width: 100%;
+min-width: 85%;
 border-radius: 10px;
 padding: 37px;
+`
+export const SubmitButton = styled.TouchableOpacity` 
+padding: 12px;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+background-color: #68DE5A;
+border-radius: 20px;
+`
+export const SubmitText = styled.Text`
+color: #fff;
+font-size: 18px;
 `
 export const Title = styled.Text`
 color: #1D1D1D;
@@ -27,7 +39,7 @@ font-weight: 500;
 align-items: center;
 margin-bottom: 30px; 
 `
-export const FormRecover = styled.View`
+export const Form = styled.View`
 color: #878686;
 font-family: Roboto;
 font-weight: 500;
@@ -35,7 +47,7 @@ font-size: 14px;
 padding-bottom: 10px;
 margin-bottom: 30px; 
 `
-export const TextInput = styled.TextInput`
+export const TextInputPass = styled.TextInput`
 border: none;
 font-size: 14px;
 line-height: 14px;
