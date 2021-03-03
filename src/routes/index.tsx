@@ -20,10 +20,10 @@ export default function Routes() {
           headerShown: false,
         }}
       >
+        <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="login" component={Login} />
         <Screen name="newPassword" component={NewPassword} />
         <Screen name="recoverPassword" component={RecoverPassword} />
-        <Screen name="splashscreen" component={SplashScreen} />
         <Screen name="deposit" component={Deposit} />
         <Screen name="register" component={LoginRegister} />
         <Screen name="dashboard" component={Dashboard} />
