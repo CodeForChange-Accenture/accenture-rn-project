@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { TextInputMask as InputMask } from 'react-native-masked-text';
 
 export const Container = styled.View`
 background: #8C52E5;
@@ -35,8 +36,17 @@ font-weight: 500;
 font-size: 14px;
 padding-bottom: 10px;
 `
-
 export const TextInput = styled.TextInput`
+border: none;
+font-size: 14px;
+line-height: 14px;
+align-items: center;
+font-weight: 500;
+margin-bottom: 25px;
+border: 2px solid white;
+border-bottom-color: #878686;
+`
+export const TextInputMask = styled(InputMask)`
 border: none;
 font-size: 14px;
 line-height: 14px;
@@ -61,6 +71,10 @@ font-size: 18px;
 export const ButtonLink = styled.TouchableOpacity` 
 margin-top: 15px;
 align-items: center;
+`
+export const ErrorText = styled.Text`
+color: red;
+font-size: 14px;
 `
 
 
