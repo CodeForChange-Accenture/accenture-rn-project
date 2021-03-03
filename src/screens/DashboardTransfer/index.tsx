@@ -128,7 +128,6 @@ const DashboardTransfer: React.FC = () => {
       .then((response) => {
         if (response.status === 200) {
           Alert.alert("Transação realizada com sucesso!");
-          console.log(postData);
           dispatch(ReloadAccountCredit(valorParaNumero));
         } else {
           Alert.alert("Erro na transação", "Valores inválidos");
