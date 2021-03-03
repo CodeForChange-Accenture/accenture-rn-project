@@ -5716,7 +5716,7 @@ readable-stream@^2.0.1, readable-stream@^2.2.2, readable-stream@~2.3.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-redux@*, redux@^4.0.0:
+redux@*, redux@^4.0.0, redux@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
@@ -6464,11 +6464,6 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
-
-toastify@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/toastify/-/toastify-2.0.1.tgz#bc9f2d7fcd91a7d9bc1e36ed86d0560297aa8584"
-  integrity sha512-Me/O93yAlwiHYwqX0su60Wv+X9ngzIT6nBLbNAFED095gMSjCBYKdu+faBxV6SE8CiQjUTBLrz8LwoXMtGz+yw==
 
 toidentifier@1.0.0:
   version "1.0.0"

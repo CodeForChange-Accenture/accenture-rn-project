@@ -4,7 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
-  Dimensions,
+  Alert,
 } from "react-native";
 import {
   Card,
@@ -33,8 +33,13 @@ const Login: React.FC = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(event: any) {
-    event.preventDefault();
+  function handleLogin() {
+
+    if (!login || !password) {
+      Alert.alert("Erro!", "Preencha os campos.")
+      return
+    }
+    
     const postData = {
       usuario: login,
       senha: password,
@@ -47,8 +52,8 @@ const Login: React.FC = () => {
         dispatch(AddUserInfos(response.data.usuario));
         navigation.navigate("dashboard");
       })
-      .catch((e) => {
-        alert(e);
+      .catch(() => {
+        Alert.alert("Erro!", "Usuário ou senha inválidos.")
       });
   }
 
@@ -73,7 +78,7 @@ const Login: React.FC = () => {
               <Feather name="arrow-right" color="white" size={20} />
             </SubmitButton>
             <ButtonLink onPress={() => navigation.navigate("newPassword")}>
-              <Text style={{ color: "blue" }}>Esqueci minha senha</Text>
+              <Text style={{ color: "blue" }}>Esqueci minha senha </Text>
             </ButtonLink>
             <ButtonLink onPress={() => navigation.navigate("register")}>
               <Text style={{ color: "blue" }}>Ainda não sou cliente</Text>
