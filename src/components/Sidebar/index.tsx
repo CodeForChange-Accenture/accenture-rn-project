@@ -13,7 +13,8 @@ import { TouchableOpacity, ScrollView, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useSelector } from "react-redux";
 import { IBank } from "../../interfaces";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 type SidebarState = {
   setToggleSideBar: Function;
   toggleSideBar?: boolean;
@@ -24,6 +25,12 @@ export default function Sidebar({
   toggleSideBar,
 }: SidebarState) {
   const state = useSelector((state: IBank) => state);
+  const navigation = useNavigation();
+  const handleLogout = async () => {
+    AsyncStorage.clear();
+    navigation.navigate("login");
+  };
+
   return (
     <SideBar>
       <Animatable.View animation="fadeInRight" easing="ease-out" duration={800}>
@@ -49,6 +56,12 @@ export default function Sidebar({
               <SidebarInfo>Você tem:</SidebarInfo>
               <UserInfo>{state.plan.length} planos de conta</UserInfo>
             </View>
+            <Division />
+            <SidebarContentTitle>
+              <TouchableOpacity onPress={handleLogout}>
+                <Feather name="log-out" color="#8C52E5" size={35} />
+              </TouchableOpacity>
+            </SidebarContentTitle>
           </ScrollView>
         </SideBarContent>
       </Animatable.View>
