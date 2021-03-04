@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Alert,
-} from "react-native";
+import { View, Text, Alert } from "react-native";
 import {
   Card,
   CardTitle,
   Container,
   Form,
   TextInput,
-  LogoGame,
+  LogoGama,
   SubmitButton,
   SubmitText,
   ButtonLink,
@@ -32,12 +28,11 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
 
   function handleLogin() {
-
     if (!login || !password) {
-      Alert.alert("Erro!", "Preencha os campos.")
-      return
+      Alert.alert("Erro!", "Preencha os campos.");
+      return;
     }
-    
+
     const postData = {
       usuario: login,
       senha: password,
@@ -51,13 +46,13 @@ const Login: React.FC = () => {
         navigation.navigate("dashboard");
       })
       .catch(() => {
-        Alert.alert("Erro!", "Usuário ou senha inválidos!")
+        Alert.alert("Erro!", "Usuário ou senha inválidos!");
       });
   }
 
   return (
     <Container>
-      <LogoGame source={logoGama} />
+      <LogoGama source={logoGama} />
       <View>
         <Card>
           <CardTitle>Seja bem vindo, informe seus dados para logar.</CardTitle>
