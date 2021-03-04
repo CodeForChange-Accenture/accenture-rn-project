@@ -115,7 +115,7 @@
 
 <p>O projeto foi dividido em pastas onde cada uma possui sua particularidade e funcionalidade, são elas:</p>
 
-![image](![image](https://user-images.githubusercontent.com/21091313/109893902-42438c00-7c6b-11eb-923a-648bac284a23.png))
+![image](https://user-images.githubusercontent.com/21091313/109894004-6e5f0d00-7c6b-11eb-83bf-39b285039f6c.png)
 
 <strong>src</strong>
 
