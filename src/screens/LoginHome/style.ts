@@ -10,7 +10,7 @@ background: #8C52E5;
 align-items: center;
 flex: 1;
 `
-export const LogoGame = styled.Image`
+export const LogoGama = styled.Image`
   margin-top: 86px;
   width: 249px;
   height: 55px;
